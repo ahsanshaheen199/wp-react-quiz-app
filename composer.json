@@ -1,0 +1,16 @@
+{
+	"name": "wordpress/react-quiz-app",
+	"type": "wordpress-plugin",
+	"authors": [
+		{
+			"name": "Ahsan Habib Shaheen",
+			"email": "ahsanshaheen199@gmail.com"
+		}
+	],
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"WPRQA\\Includes\\": "includes/"
+		}
+	}
+}

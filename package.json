@@ -11,10 +11,15 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@wordpress/scripts": "^16.1.4"
+		"@wordpress/scripts": "^16.1.4",
+		"autoprefixer": "^9.8.6",
+		"postcss": "^7.0.36",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
 	},
 	"dependencies": {
 		"@wordpress/components": "^14.1.5",
-		"@wordpress/element": "^3.1.1"
+		"@wordpress/element": "^3.1.1",
+		"@wordpress/icons": "^4.0.1",
+		"uuid": "^8.3.2"
 	}
 }

@@ -10,6 +10,9 @@ class Menu
     {
         add_action('admin_menu', [$this, 'adminMenu']);
         add_action('admin_enqueue_scripts', [$this, 'adminAssets']);
+
+        add_action('wp_enqueue_scripts', [$this, 'frontendAssets']);
+        add_shortcode('wprqa_frontend', [$this, 'wprqa_frontend_shortcode']);
     }
 
     public static function instance()
@@ -23,8 +26,8 @@ class Menu
     public function adminMenu()
     {
         add_menu_page(
-            'WPRQA',
-            'WPRQA',
+            __('Quiz App', 'wprqa'),
+            __('Quiz App', 'wprqa'),
             'manage_options',
             'wprqa',
             [$this, 'adminMenuHtml']
@@ -34,9 +37,7 @@ class Menu
     public function adminMenuHtml()
     {
 ?>
-        <div class="wrap">
-            <div id="root"></div>
-        </div>
+        <div id="wprqa"></div>
 <?php }
 
     public function adminAssets($hook)
@@ -52,5 +53,20 @@ class Menu
 
             wp_enqueue_style('wprqa-admin', WPRQA_PLUGIN_DIST_FILE_URL . '/index.css');
         }
+    }
+
+    public function frontendAssets()
+    {
+        $assetBuildPath = include(WPRQA_PLUGIN_DIST_FILE_PATH . '/frontend/frontend.asset.php');
+        wp_enqueue_script('wprqa-frontend', WPRQA_PLUGIN_DIST_FILE_URL . '/frontend/frontend.js', $assetBuildPath['dependencies'], $assetBuildPath['version'], true);
+    }
+
+    public function wprqa_frontend_shortcode($atts)
+    {
+        ob_start();
+
+        echo '<div id="mainwrap"></div>';
+
+        return ob_get_clean();
     }
 }

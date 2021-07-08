@@ -32196,7 +32196,11 @@ video {
   content: none;
 }
 
-.wprqa-button svg{
+#wpcontent {
+  padding-left: 0px;
+}
+
+.wprqa-button svg {
   display: inline-block;
   padding-right: 6px;
   fill: currentColor;
@@ -32204,7 +32208,8 @@ video {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-button.components-button.components-panel__body-toggle .components-panel__arrow {
+button.components-button.components-panel__body-toggle
+	.components-panel__arrow {
   position: absolute;
   right: 1rem;
   top: 50%;
@@ -188038,5 +188043,6 @@ button.components-button.components-panel__body-toggle .components-panel__arrow 
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
 
 /*# sourceMappingURL=index.css.map*/

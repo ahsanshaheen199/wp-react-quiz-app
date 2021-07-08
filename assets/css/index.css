@@ -2,17 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-.wprqa-button svg{
-    display: inline-block;
-    padding-right: 6px;
-    @apply fill-current;
-    @apply text-white;
+#wpcontent {
+	@apply pl-0;
 }
 
-button.components-button.components-panel__body-toggle .components-panel__arrow {
-    @apply absolute;
-    @apply right-4;
-    @apply top-1/2;
-    @apply transform;
-    @apply -translate-y-1/2;
+.wprqa-button svg {
+	@apply inline-block;
+	padding-right: 6px;
+	@apply fill-current;
+	@apply text-white;
+}
+
+button.components-button.components-panel__body-toggle
+	.components-panel__arrow {
+	@apply absolute;
+	@apply right-4;
+	@apply top-1/2;
+	@apply transform;
+	@apply -translate-y-1/2;
 }

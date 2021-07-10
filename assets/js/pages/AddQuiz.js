@@ -17,10 +17,21 @@ function AddQuiz() {
 			questions: [
 				...quiz.questions,
 				{
-					id: 'as',
+					id: uuid(),
 					questionText: 'Untitled Question',
 					answerOptions: [],
 				},
+			],
+		});
+	};
+
+	const deleteQuestion = (question) => {
+		setQuizData({
+			...quiz,
+			questions: [
+				...quiz.questions.filter((ques) => {
+					return ques.id !== question.id;
+				}),
 			],
 		});
 	};
@@ -97,6 +108,9 @@ function AddQuiz() {
 													index={index}
 													questions={quiz.questions}
 													setQuestions={setQuestions}
+													deleteQuestion={
+														deleteQuestion
+													}
 												/>
 											</>
 										);

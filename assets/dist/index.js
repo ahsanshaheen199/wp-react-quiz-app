@@ -125,10 +125,15 @@ function QuesitenItem({
   question,
   setQuestions,
   questions,
+  deleteQuestion,
   index
 }) {
   const setQuestionsData = question => {
     setQuestions(question);
+  };
+
+  const deleteQuestionData = question => {
+    deleteQuestion(question);
   };
 
   const setAnswerOptionData = answerOption => {
@@ -232,7 +237,14 @@ function QuesitenItem({
     variant: "primary",
     className: "text-blue-600 rounded-md font-semibold hover:text-blue-800 mt-2 flex items-center",
     onClick: () => addNewAnswer(question)
-  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Add New Answer')))));
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Add New Answer')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["PanelRow"], {
+    className: "p-4"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "flex justify-end"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "text-red-600 rounded-md font-semibold hover:text-red-800",
+    onClick: () => deleteQuestionData(question)
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Delete Question')))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (QuesitenItem);
@@ -361,10 +373,18 @@ function AddQuiz() {
   const addNewQuestion = () => {
     setQuizData({ ...quiz,
       questions: [...quiz.questions, {
-        id: 'as',
+        id: Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])(),
         questionText: 'Untitled Question',
         answerOptions: []
       }]
+    });
+  };
+
+  const deleteQuestion = question => {
+    setQuizData({ ...quiz,
+      questions: [...quiz.questions.filter(ques => {
+        return ques.id !== question.id;
+      })]
     });
   };
 
@@ -418,7 +438,8 @@ function AddQuiz() {
       question: question,
       index: index,
       questions: quiz.questions,
-      setQuestions: setQuestions
+      setQuestions: setQuestions,
+      deleteQuestion: deleteQuestion
     }));
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["plusCircle"],

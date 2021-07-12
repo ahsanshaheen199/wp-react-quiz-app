@@ -5,7 +5,9 @@ Author: Ahsan Shaheen
 Version: 1.0
 */
 
-use WPRQA\Includes\Menu;
+use WPRQA\Includes\API\QuizApi;
+use WPRQA\Includes\Database\Quiz;
+use WPRQA\Includes\Menu\Menu;
 
 final class WP_React_Quiz_App
 {
@@ -30,6 +32,8 @@ final class WP_React_Quiz_App
     public function dependency_class_instance()
     {
         Menu::instance();
+        Quiz::instance();
+        QuizApi::instance();
     }
 
     public function includes()
@@ -39,6 +43,7 @@ final class WP_React_Quiz_App
 
     public function define_constants()
     {
+        define('WPRQA_PLUGIN_URL', __FILE__);
         define('WPRQA_PLUGIN_FILE', plugin_dir_path(__FILE__));
         define('WPRQA_PLUGIN_DIST_FILE_PATH', plugin_dir_path(__FILE__) . 'assets/dist');
         define('WPRQA_PLUGIN_DIST_FILE_URL', plugin_dir_url(__FILE__) . 'assets/dist');

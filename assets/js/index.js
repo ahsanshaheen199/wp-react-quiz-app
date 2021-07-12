@@ -3,14 +3,15 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import QuizList from './pages/QuizList';
 import AddQuiz from './pages/AddQuiz';
 import NotFound from './pages/NotFound';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import '../css/index.css';
-import { QuestionProvider } from './context/QuestionContext';
+import { QuizProvider } from './context/QuizContext';
 
 const QuizApp = () => {
 	return (
 		<>
 			<HashRouter>
-				<QuestionProvider>
+				<QuizProvider>
 					<Switch>
 						<Route exact path='/'>
 							<QuizList />
@@ -22,7 +23,7 @@ const QuizApp = () => {
 							<NotFound />
 						</Route>
 					</Switch>
-				</QuestionProvider>
+				</QuizProvider>
 			</HashRouter>
 		</>
 	);

@@ -1,12 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { useContext } from '@wordpress/element';
 import { Link } from 'react-router-dom';
-import { QuestionContext } from '../context/QuestionContext';
+import { QuizContext } from '../context/QuizContext';
 
 function QuizList() {
-	const { state, dispatch } = useContext(QuestionContext);
+	const { state, dispatch } = useContext(QuizContext);
 
-	// console.log(state);
+	console.log(state);
 	return (
 		<>
 			<div className='bg-white py-5 rounded-md'>

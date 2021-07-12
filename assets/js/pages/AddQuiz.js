@@ -1,15 +1,58 @@
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { useContext, useState } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 import { plusCircle } from '@wordpress/icons';
 import { v4 as uuid } from 'uuid';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import QuesitenItem from '../components/QuesitenItem';
+import { addQuiz } from '../actions/quizActions';
+import { QuizContext } from '../context/QuizContext';
+import apiFetch from '@wordpress/api-fetch';
 
 function AddQuiz() {
 	const [quiz, setQuizData] = useState({
 		quizTitle: '',
 		questions: [],
 	});
+
+	const history = useHistory();
+
+	const { dispatch } = useContext(QuizContext);
+
+	const addQuizData = () => {
+		apiFetch({
+			path: `/wprqa/v1/quizzes`,
+			method: 'POST',
+			body: JSON.stringify(quiz),
+			headers: {
+				'X-WP-Nonce': wprqaData.nonce,
+			},
+		}).then((response) => {
+			dispatch(addQuiz(quiz));
+			Swal.fire({
+				toast: true,
+				icon: 'success',
+				title: __(response.message),
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 2000,
+				showClass: {
+					popup: 'swal2-noanimation',
+				},
+				hideClass: {
+					popup: '',
+				},
+			});
+
+			setQuizData({
+				quizTitle: '',
+				questions: [],
+			});
+
+			history.push('/');
+		});
+	};
 
 	const addNewQuestion = () => {
 		setQuizData({
@@ -36,8 +79,6 @@ function AddQuiz() {
 		});
 	};
 
-	console.log(quiz);
-
 	const setQuestions = (question) => {
 		setQuizData({
 			...quiz,
@@ -62,7 +103,7 @@ function AddQuiz() {
 						<div>
 							<a
 								className='rounded-md text-white hover:text-white bg-blue-600 hover:bg-blue-800 transition-all py-4 px-5 font-semibold text-sm cursor-pointer'
-								to='/add'>
+								onClick={addQuizData}>
 								{__('Save Quiz')}
 							</a>
 						</div>
@@ -73,7 +114,7 @@ function AddQuiz() {
 				<div className='container mx-auto px-4'>
 					<div className='flex justify-center'>
 						<div className='w-8/12'>
-							<div className='bg-white rounded-md py-6 px-4'>
+							<div className='bg-white rounded-md p-10'>
 								<div className='mb-6'>
 									<input
 										type='text'
@@ -106,7 +147,6 @@ function AddQuiz() {
 												<QuesitenItem
 													question={question}
 													index={index}
-													questions={quiz.questions}
 													setQuestions={setQuestions}
 													deleteQuestion={
 														deleteQuestion

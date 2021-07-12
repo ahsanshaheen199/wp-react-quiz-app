@@ -1,6 +1,6 @@
 <?php
 
-namespace WPRQA\Includes;
+namespace WPRQA\Includes\Menu;
 
 class Menu
 {
@@ -38,6 +38,7 @@ class Menu
     {
 ?>
         <div id="wprqa"></div>
+        <div id="toast-root"></div>
 <?php }
 
     public function adminAssets($hook)
@@ -46,10 +47,10 @@ class Menu
         if ($hook === 'toplevel_page_wprqa') {
             wp_enqueue_script('wprqa-admin', WPRQA_PLUGIN_DIST_FILE_URL . '/index.js', $assetBuildPath['dependencies'], $assetBuildPath['version'], true);
 
-            // wp_localize_script('wprcb-admin', 'wprcbData', [
-            //     'nonce' => wp_create_nonce('wp_rest'),
-            //     'apiUrl' => rest_url()
-            // ]);
+            wp_localize_script('wprqa-admin', 'wprqaData', [
+                'nonce' => wp_create_nonce('wp_rest'),
+                'apiUrl' => rest_url()
+            ]);
 
             wp_enqueue_style('wprqa-admin', WPRQA_PLUGIN_DIST_FILE_URL . '/index.css');
         }

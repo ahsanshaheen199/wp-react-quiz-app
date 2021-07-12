@@ -2,13 +2,7 @@ import { PanelBody, PanelRow, Button } from '@wordpress/components';
 import { v4 as uuid } from 'uuid';
 import { __ } from '@wordpress/i18n';
 
-function QuesitenItem({
-	question,
-	setQuestions,
-	questions,
-	deleteQuestion,
-	index,
-}) {
+function QuesitenItem({ question, setQuestions, deleteQuestion, index }) {
 	const setQuestionsData = (question) => {
 		setQuestions(question);
 	};
@@ -161,7 +155,7 @@ function QuesitenItem({
 			<PanelRow className='p-4'>
 				<div className='flex justify-end'>
 					<Button
-						className='text-red-600 rounded-md font-semibold hover:text-red-800'
+						className='text-white bg-red-600 rounded-md font-semibold hover:bd-red-800 py-4 px-5'
 						onClick={() => deleteQuestionData(question)}>
 						{__('Delete Question')}
 					</Button>

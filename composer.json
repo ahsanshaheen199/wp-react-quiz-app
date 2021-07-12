@@ -7,10 +7,12 @@
 			"email": "ahsanshaheen199@gmail.com"
 		}
 	],
-	"require": {},
 	"autoload": {
 		"psr-4": {
 			"WPRQA\\Includes\\": "includes/"
 		}
+	},
+	"require": {
+		"tareq1988/wp-eloquent": "dev-master"
 	}
 }
